@@ -6,12 +6,17 @@ Defaults to /output if not set.
 """
 
 import os
+from pathlib import Path
 
 
 def main():
     """Read line.txt and write its contents to entry.txt in the output directory."""
+    # Locate line.txt relative to this script's own file location so it works
+    # regardless of the current working directory.
+    line_path = Path(__file__).resolve().parent / "line.txt"
+
     # Read the line from line.txt
-    with open('line.txt', 'r', encoding='utf-8') as f:
+    with open(line_path, 'r', encoding='utf-8') as f:
         line = f.read()
 
     # Get the output directory from the environment variable or default to /output
